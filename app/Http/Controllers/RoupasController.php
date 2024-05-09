@@ -73,4 +73,53 @@ public function excluir($id){
     ]);
 }
 
+public function editar (Request $request){
+    $roupas = Roupa::find($request->id);
+
+    if(!isset($roupas)){
+        return response()->json([
+            'status'=> false,
+            'message'=> 'Roupa não encontrada'
+        ]);
+    }
+
+    if (isset($request->tecido)){
+        $roupas->tecido = $request->tecido;
+    }
+   
+    if (isset($request->tamanho)){                                                
+        $roupas->tamanho = $request->tamanho;
+    }
+
+    if (isset($request->cor)){
+        $roupas->cor = $request->cor;
+    }
+
+    if (isset($request->categoria)){
+        $roupas->categoria = $request->categoria;
+    }
+
+    if (isset($request->fabricacao)){
+        $roupas->fabricacao = $request->fabricacao;
+    }
+
+    if (isset($request->estacao)){
+        $roupas->estacao = $request->estacao;
+    }
+
+    if (isset($request->descricao)){
+        $roupas->descricao = $request->descricao;
+    }
+
+
+    $roupas->update();
+
+    return response()->json([
+        'status'=> true,
+        'message'=> 'Roupa atualizada.'
+    ]);
+
+}
+
+
 }
