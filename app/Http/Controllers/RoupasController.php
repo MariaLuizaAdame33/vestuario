@@ -27,9 +27,9 @@ class RoupasController extends Controller
         ], 200);
 }
 
-public function pesquisarPorCategoria(Request $request)
+public function pesquisarPorCategoria($busca)
     {
-        $roupas = Roupa::where('categoria', 'like', '%' . $request->categoria . '%')->get();
+        $roupas = Roupa::where('categoria', 'like', '%' . $busca . '%')->get();
         if (count($roupas) > 0) {
             return response()->json([
                 'status' => true,
@@ -73,7 +73,7 @@ public function excluir($id){
     ]);
 }
 
-public function editar (Request $request){
+public function editar (RoupasRequest $request){
     $roupas = Roupa::find($request->id);
 
     if(!isset($roupas)){
